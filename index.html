@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard: Talleres Ofrecidos 2024-2025</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/recharts@2.8.0/esm/index.js" type="module"></script>
+    <script src="https://unpkg.com/lucide-react@0.263.1/dist/esm/index.js" type="module"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+        const { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } = Recharts;
+        
+        // Componente del Dashboard
+        const DashboardTalleres = () => {
+          const [selectedCategory, setSelectedCategory] = useState('all');
+          const [selectedModality, setSelectedModality] = useState('all');
+
+          const talleresPorMes = [
+            { mes: '2024-09', periodo: 'Sep 2024', talleres: 2, participantes: 45, promedio: 22.5 },
+            { mes: '2024-10', periodo: 'Oct 2024', talleres: 1, participantes: 12, promedio: 12 },
+            { mes: '2024-11', periodo: 'Nov 2024', talleres: 3, participantes: 89, promedio: 29.7 },
+            { mes: '2024-12', periodo: 'Dic 2024', talleres: 4, participantes: 145, promedio: 36.3 },
+            { mes: '2025-01', periodo: 'Ene 2025', talleres: 3, participantes: 67, promedio: 22.3 },
+            { mes: '2025-02', periodo: 'Feb 2025', talleres: 2, participantes: 78, promedio: 39 },
+            { mes: '2025-03', periodo: 'Mar 2025', talleres: 4, participantes: 6824, promedio: 1706 },
+            { mes: '2025-04', periodo: 'Abr 2025', talleres: 2, participantes: 1067, promedio: 533.5 },
+            { mes: '2025-05', periodo: 'May 2025', talleres: 6, participantes: 521, promedio: 86.8 },
+            { mes: '2025-06', periodo: 'Jun 2025', talleres: 2, participantes: 17, promedio: 8.5 },
+            { mes: '2025-08', periodo: 'Ago 2025', talleres: 2, participantes: 68, promedio: 34 }
+          ];
+
+          const categorias = [
+            { categoria: 'Inteligencia Artificial', talleres: 12, participantes: 7089, porcentaje: 81.1, color: '#3B82F6' },
+            { categoria: 'Finanzas', talleres: 5, participantes: 1267, porcentaje: 14.5, color: '#10B981' },
+            { categoria: 'Metodología de Investigación', talleres: 6, participantes: 174, porcentaje: 2.0, color: '#F59E0B' },
+            { categoria: 'Medios Digitales', talleres: 3, participantes: 134, porcentaje: 1.5, color: '#8B5CF6' },
+            { categoria: 'Ciencias de la Salud', talleres: 3, participantes: 56, porcentaje: 0.6, color: '#EF4444' },
+            { categoria: 'Otros', talleres: 2, participantes: 22, porcentaje: 0.3, color: '#6B7280' }
+          ];
+
+          return (
+            <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-6">
+              <div className="max-w-7xl mx-auto">
+                <div className="text-center mb-8">
+                  <h1 className="text-5xl font-bold text-gray-900 mb-4">
+                    🎯 Dashboard: Talleres Ofrecidos 2024-2025
+                  </h1>
+                  <p className="text-xl text-gray-600">
+                    Análisis completo de capacitación y desarrollo académico
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  <div className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Total Talleres</p>
+                        <p className="text-4xl font-bold text-gray-900">31</p>
+                        <p className="text-sm text-gray-500">Periodo 2024-2025</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Total Participantes</p>
+                        <p className="text-4xl font-bold text-gray-900">8,742</p>
+                        <p className="text-sm text-gray-500">Alcance extraordinario</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Promedio por Taller</p>
+                        <p className="text-3xl font-bold text-gray-900">282</p>
+                        <p className="text-sm text-gray-500">Participantes por evento</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-500">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">Facilitadores Activos</p>
+                        <p className="text-3xl font-bold text-gray-900">12</p>
+                        <p className="text-sm text-gray-500">Expertos diversos</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-6">
+                    💡 Insights Clave del Programa de Talleres
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <h4 className="font-semibold text-blue-800 mb-2">Revolución Digital</h4>
+                      <p className="text-sm text-blue-700">
+                        Los talleres digitales dominan con 94.6% de participación. Prof. Milton Fajardo lidera la transformación educativa digital.
+                      </p>
+                    </div>
+                    
+                    <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                      <h4 className="font-semibold text-green-800 mb-2">Temas Emergentes</h4>
+                      <p className="text-sm text-green-700">
+                        Inteligencia Artificial representa el 81.1% de participación, demostrando alta demanda por contenido tecnológico actual.
+                      </p>
+                    </div>
+                    
+                    <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                      <h4 className="font-semibold text-yellow-800 mb-2">Oportunidad de Crecimiento</h4>
+                      <p className="text-sm text-yellow-700">
+                        Los talleres presenciales mantienen valor estratégico con 23 eventos, ideales para interacción directa y networking profesional.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 text-center text-sm text-gray-500">
+                  <p>Dashboard generado en Septiembre 2025 | Datos: 31 talleres analizados | 8,742 participantes impactados</p>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        ReactDOM.render(<DashboardTalleres />, document.getElementById('root'));
+    </script>
+</body>
+</html>
